@@ -1,8 +1,10 @@
-# React + Vite
+# Drum Machine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Deployed at https://drummachinejj.vercel.app/
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Simple drum machine to showcase the use of frameworks and features on a simple application.
+- Use of react+vite as a javascript framework for developing the page.
+- Styling done on plain css with a look emulating to real drumpads.
+- Audio management done with Web Audio API to avoid audio lag.
+- Demostration of basic react hooks such as useEffect and useState.
+- Responsive design for landscape and portrait view.
