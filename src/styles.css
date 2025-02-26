@@ -24,7 +24,7 @@ body {
 }
 
 .drum-container p{
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: #fafafa;
   display: inline-block;
   font-size: 32px;
@@ -59,9 +59,9 @@ body {
 }
 
 .drum-pad:active, .pressed {
-  background-color: #ff5733; /* Change color when pressed */
-  transform: scale(0.95); /* Slight shrink effect */
-  box-shadow: 0 0 10px #ff5733;
+  background: linear-gradient(135deg, #000000, #252525);
+  transform: scale(0.95);
+  box-shadow: 0 0 10px #dadada;
 }
 
 

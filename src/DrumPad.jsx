@@ -1,39 +1,37 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useRef } from "react";
 
-const DrumPad = ({ keyTrigger, sound, label, audioContext, buffers, volume  }) => {
-    const [isPressed, setIsPressed] = useState(false);
-    const playSound = () => {
-      if (buffers[sound]) {
-        const source = audioContext.createBufferSource();
-        const gainNode = audioContext.createGain(); 
-        source.buffer = buffers[sound];
-        source.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        gainNode.gain.value = volume;
-        source.start(0);
-      }
-      setIsPressed(true);
-      setTimeout(() => setIsPressed(false), 150);
-    };
-  
-    useEffect(() => {
-      const handleKeyPress = (event) => {
-        if (event.key.toUpperCase() === keyTrigger) {
-          playSound();
-        }
-      };  
-      window.addEventListener("keydown", handleKeyPress);
-      return () => window.removeEventListener("keydown", handleKeyPress);
-    }, [keyTrigger, buffers, volume]);
-  
-    return (
-      <button 
-        onClick={playSound} 
-        className={`drum-pad ${isPressed ? "pressed" : ""}`}>
-        <h3>{label}</h3>
-        <h4>({keyTrigger})</h4>
-      </button>
-    );
+const DrumPad = ({ keyTrigger, sound, label, volume }) => {
+  const audioRef = useRef(null);
+  const padRef = useRef(null);
+  const playSound = () => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    }
+    requestAnimationFrame(() => {
+      padRef.current.classList.add("pressed");
+      setTimeout(() => padRef.current.classList.remove("pressed"), 100);
+    });
   };
 
-  export default DrumPad
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.code === `Key${keyTrigger}`) {
+        playSound();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [keyTrigger, volume]);
+
+  return (
+    <button ref={padRef} onClick={playSound} className="drum-pad">
+      <h3>{label}</h3>
+      <h4>({keyTrigger})</h4>
+      <audio ref={audioRef} src={`/${sound}`} preload="auto" />
+    </button>
+  );
+};
+
+export default DrumPad;

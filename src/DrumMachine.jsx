@@ -37,19 +37,13 @@ const DrumMachine = () => {
   <div className="drum-container">
     <p>DRUM MACHINE</p>
     <div className="drum-machine">
-      {drumPads.map(({ key, ...pad }) => (
-        <DrumPad key={key} keyTrigger={key} {...pad} audioContext={audioContext} buffers={buffers} volume={volume}/>
+      {drumPads.map(({ key, sound, label }) => (
+        <DrumPad key={key} keyTrigger={key} sound={sound} label={label} audioContext={audioContext} buffers={buffers} volume={volume}/>
       ))}
     </div>
       <div className="volume-control">
         <p>Volume</p>
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={volume}
-          onChange={(e) => setVolume(parseFloat(e.target.value))}/>
+        <input type="range" min="0" max="1" step="0.01" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))}/>
       </div>
    </div>
   );
